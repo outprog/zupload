@@ -44,6 +44,7 @@ router.post('/up', function(req, res, next) {
 
 // 文件删除
 router.get('/del', function(req, res, next) {
+  if(!req.query.path) return res.send({res: 'no path'});
   var filePath = req.query.path;
   delFile = path.join(dir, filePath);
   fs.unlink(delFile, function(err) {
