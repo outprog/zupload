@@ -35,6 +35,10 @@ router.post('/up', function(req, res, next) {
   form.multiples = true;
 
   form.parse(req, function(err, fields, files) {
+    if(err) {
+      console.log(err);
+      return res.send({res: 'failed'});
+    }
     var reg = new RegExp(dir, 'g');
     var output = JSON.stringify(files).replace(reg, '');
     res.send(output);
