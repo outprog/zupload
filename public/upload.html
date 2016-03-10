@@ -1,4 +1,38 @@
-<form action="/zupload/up" enctype="multipart/form-data" method="post">
-  <input type="file" name="upload" multiple="multiple"><br>
-  <input type="submit" value="Upload">
-</form>
+<html>
+  <head>
+  </head>
+  <body>
+    <form id="file" action="/zupload/up" enctype="multipart/form-data" method="post">
+      <input type="file" id="upload" multiple="multiple"><br>
+      <button id="uploadButton">upload</button>
+    </form>
+    <script src="/javascripts/jquery.min.js"></script>
+    <script>
+      $("#uploadButton").bind('click', function(event) {
+
+        event.preventDefault();
+
+        var data = new FormData();
+
+        $.each($('#upload')[0].files, function(i, file) {
+          data.append('file-' + i, file);
+        });
+
+        console.log(data);
+
+        $.ajax({
+          url: '/zupload/up',
+          data: data,
+          cache: false,
+          contentType: false,
+          processData: false,
+          type: 'POST',
+          success: function(data){
+              alert(data);
+          }
+        });
+
+      });
+    </script>
+  </body>
+<html>
