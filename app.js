@@ -22,6 +22,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/zupload', express.static(path.join(__dirname, 'upload_dir')));
+
 app.use('/', routes);
 app.use('/zupload', zupload);
 
